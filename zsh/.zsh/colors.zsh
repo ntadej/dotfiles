@@ -20,4 +20,5 @@ unset LSCOLORS
 #expor tLSCOLORS=gxfxcxdxbxegedabagacad
 
 export CLICOLOR=1
-export LS_COLORS=exfxcxdxbxegedabagacad
+export LSCOLORS=ExFxBxDxCxegedabagacad
+export LS_COLORS=ExFxBxDxCxegedabagacad

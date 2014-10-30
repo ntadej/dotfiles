@@ -8,5 +8,5 @@ if [[ $USER != 'tadej' ]] ; then
 fi
 
 if (($+SSH_CONNECTION)) ; then
-    PROMPT='${PR_BOLD_GREEN}%n%{$reset_color%}@${PR_BOLD_GREEN}%m%{$reset_color%}:${PR_BOLD_BLUE}%2~%{$reset_color%} $'
+    PROMPT='${PR_BOLD_GREEN}%n%{$reset_color%}@${PR_BOLD_GREEN}%m%{$reset_color%}:${PR_BOLD_BLUE}%2~%{$reset_color%} $ '
 fi

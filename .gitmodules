@@ -1,0 +1,3 @@
+[submodule "misc/terminal-piperita"]
+	path = misc/terminal-piperita
+	url = https://github.com/jacobtomlinson/terminal-piperita.git
