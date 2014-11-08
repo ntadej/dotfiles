@@ -1,0 +1,9 @@
+[user]
+	name = Tadej Novak
+	email = tadej@tano.si
+[color]
+	ui = true
+[push]
+	default = simple
+[alias]
+	up = pull --rebase
