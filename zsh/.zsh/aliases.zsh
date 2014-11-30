@@ -6,6 +6,10 @@ if [[ $IS_MAC -eq 1 ]]; then
 	alias ll="ls -lh"
 	alias la="ls -A"
 	alias l="ls -C"
+
+	# Useful Mac aliases
+	alias flushdns="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say DNS cache flushed"
+	alias deletedownloadcache="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 fi
 
 if [[ $IS_LINUX -eq 1 ]]; then
