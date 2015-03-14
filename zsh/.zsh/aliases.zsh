@@ -10,6 +10,13 @@ if [[ $IS_MAC -eq 1 ]]; then
 	# Useful Mac aliases
 	alias flushdns="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say DNS cache flushed"
 	alias deletedownloadcache="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+	alias clearprefcache="killall -u tadej cfprefsd"
+
+	alias inkscape=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+
+	alias caskup="brew cask list | xargs brew cask install"
+
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 
 if [[ $IS_LINUX -eq 1 ]]; then
