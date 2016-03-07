@@ -1,5 +1,3 @@
-alias st="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-
 if [[ $IS_MAC -eq 1 ]]; then
 	eval "$(hub alias -s)"
 
@@ -12,9 +10,7 @@ if [[ $IS_MAC -eq 1 ]]; then
 	alias deletedownloadcache="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 	alias clearprefcache="killall -u tadej cfprefsd"
 
-	alias inkscape=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
-
-	alias caskup="brew cask list | xargs brew cask install"
+	alias inkscape=/Applications/InkscapeConsole.app/Contents/Resources/bin/inkscape
 
 	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
