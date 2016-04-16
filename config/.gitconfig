@@ -1,9 +1,13 @@
 [user]
 	name = Tadej Novak
 	email = tadej@tano.si
+[github]
+    user = ntadej
 [color]
 	ui = true
+[pull]
+	rebase = true
 [push]
 	default = simple
-[alias]
-	up = pull --rebase
+[core]
+	excludesfile = ~/.gitignore
