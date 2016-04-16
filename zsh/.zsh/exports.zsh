@@ -28,3 +28,6 @@ if [[ $IS_MAC -eq 1 ]]; then
 
 	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
+
+export NVM_DIR="$HOME/.nvm"
+export LOCAL_ROOT_DIR=/opt/root/current
