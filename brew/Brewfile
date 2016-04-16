@@ -1,0 +1,38 @@
+# A few of my favorite brews
+cask_args appdir: '/Applications'
+
+# Tap extra
+tap 'caskroom/cask'
+tap 'homebrew/command-not-found'
+tap 'homebrew/services'
+
+brew 'zsh'
+brew 'git'
+brew 'hub'
+brew 'htop-osx'
+brew 'imagemagick'
+brew 'p7zip'
+brew 'png2ico'
+brew 'python'
+brew 'python3'
+brew 'wget'
+
+brew 'carthage'
+brew 'ccache'
+brew 'cmake'
+brew 'doxygen'
+brew 'lcov'
+brew 'mariadb'
+brew 'nginx'
+brew 'ninja'
+brew 'watchman'
+
+cask 'appcleaner'
+cask 'gimp'
+cask 'scroll-reverser'
+cask 'sequel-pro'
+cask 'texstudio'
+cask 'wineskin-winery'
+
+brew 'ant'
+brew 'djvu2pdf'
