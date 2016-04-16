@@ -3,6 +3,9 @@
 # zshenv has already started PATH with rbenv so append only here
 #export PATH=$PATH~/bin:/usr/local/bin:/usr/local/sbin:~/bin
 
+# remove duplicate entries
+typeset -U PATH
+
 # Add fpath
 if [[ $IS_MAC -eq 1 ]]; then
 	fpath=('/usr/local/share/zsh/site-functions' $fpath)
@@ -20,6 +23,8 @@ export ARCHFLAGS='-arch x86_64'
 
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-#export EDITOR='subl -w'
+if [[ $IS_MAC -eq 1 ]]; then
+    export EDITOR='atom'
 
-#export PYTHONPATH=/usr/local/lib/python2.6/site-packages
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+fi
