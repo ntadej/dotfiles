@@ -11,6 +11,8 @@ if which rvm-prompt &> /dev/null; then
 fi
 
 # Homebrew command-not-found
-if brew command command-not-found-init > /dev/null; then
-    eval "$(brew command-not-found-init)";
+if [ -x /usr/local/bin/brew ]; then
+    if brew command command-not-found-init > /dev/null; then
+        eval "$(brew command-not-found-init)";
+    fi
 fi
