@@ -1,6 +1,7 @@
 [user]
 	name = Tadej Novak
 	email = tadej@tano.si
+	signingkey = 4CC60378
 [github]
     user = ntadej
 [color]
@@ -10,4 +11,5 @@
 [push]
 	default = simple
 [core]
+	editor = vim
 	excludesfile = ~/.gitignore
