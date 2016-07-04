@@ -1,7 +1,12 @@
+# rbenv
+[[ -s "$HOME/.rbenv/bin/rbenv" ]] && export PATH="$HOME/.rbenv/bin:$PATH"
+command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh" # This loads nvm
-[[ -s "$HOME/server-config/env.sh" ]] && source "$HOME/server-config/env.sh" # This loads server environment variables
+# nvm
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+
+# server environment variables
+[[ -s "$HOME/server-config/env.sh" ]] && source "$HOME/server-config/env.sh"
 
 # Root
 if [[ -s $LOCAL_ROOT_DIR ]]; then

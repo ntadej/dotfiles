@@ -4,15 +4,3 @@ if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
     PATH='/usr/local/bin:'$PATH
 fi
-
-# Add RVM to PATH for scripting, if rvm is present
-if which rvm-prompt &> /dev/null; then
-    export PATH=$HOME/.rvm/bin:$PATH
-fi
-
-# Homebrew command-not-found
-if [ -x /usr/local/bin/brew ]; then
-    if brew command command-not-found-init > /dev/null; then
-        eval "$(brew command-not-found-init)";
-    fi
-fi
