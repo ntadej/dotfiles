@@ -31,3 +31,7 @@ fi
 
 export NVM_DIR="$HOME/.nvm"
 export LOCAL_ROOT_DIR=/opt/root/current
+
+if [[ $IS_LXPLUS -eq 1 ]]; then
+	export RUCIO_ACCOUNT=tadej
+fi

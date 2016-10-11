@@ -23,3 +23,7 @@ fi
 if [[ -x `which virtualenv 2> /dev/null` ]]; then
     HAS_VIRTUALENV=1
 fi
+
+if [[ -n `alias setupATLAS 2> /dev/null` ]]; then
+    IS_LXPLUS=1
+fi
