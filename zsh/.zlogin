@@ -14,3 +14,6 @@ if [[ -s $LOCAL_ROOT_DIR ]]; then
     source thisroot.sh
     popd >/dev/null
 fi
+
+# travis gem
+[[ -f "$HOME/.travis/travis.sh" ]] && source "$HOME/.travis/travis.sh"

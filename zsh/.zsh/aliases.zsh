@@ -51,6 +51,8 @@ if [[ $IS_MAC -eq 1 ]]; then
 	alias clearprefcache="killall -u tadej cfprefsd"
 
 	alias inkscape=/Applications/InkscapeConsole.app/Contents/Resources/bin/inkscape
+
+	alias lxplus="sshold lxplus.cern.ch -o gssapitrustdns=yes"
 fi
 
 # -------------------------------------------------------------------
