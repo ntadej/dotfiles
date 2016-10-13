@@ -52,7 +52,7 @@ if [[ $IS_MAC -eq 1 ]]; then
 
 	alias inkscape=/Applications/InkscapeConsole.app/Contents/Resources/bin/inkscape
 
-	alias lxplus="sshold lxplus.cern.ch -o gssapitrustdns=yes"
+	alias lxplus="sshold -Y lxplus.cern.ch -o gssapitrustdns=yes"
 fi
 
 # -------------------------------------------------------------------
