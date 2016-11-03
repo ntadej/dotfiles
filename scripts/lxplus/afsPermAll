@@ -1,0 +1,4 @@
+#!/bin/bash
+for folder in `find $1 -type d -name '*'`; do
+    fs setacl $folder $2 all
+done

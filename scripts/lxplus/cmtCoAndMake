@@ -1,0 +1,4 @@
+#!/bin/bash
+REVISION=`cmt show versions $1 | cut -d " " -f 2`
+cmt co -r $REVISION $1
+make -C $TestArea/$1/cmt

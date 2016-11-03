@@ -30,8 +30,11 @@ if [[ $IS_MAC -eq 1 ]]; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-export LOCAL_ROOT_DIR=/opt/root/current
 
+# lxplus specials
 if [[ $IS_LXPLUS -eq 1 ]]; then
 	export RUCIO_ACCOUNT=tadej
+	export PATH=$PATH:~/private/dotfiles/scripts/lxplus
+else
+	export LOCAL_ROOT_DIR=/opt/root/current
 fi
