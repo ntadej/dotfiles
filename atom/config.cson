@@ -1,0 +1,35 @@
+"*":
+  "atom-beautify":
+    c:
+      default_beautifier: "clang-format"
+    cpp:
+      default_beautifier: "clang-format"
+    general:
+      _analyticsUserId: "c42e44a3-ffc0-49d8-9cc6-21041f0f5938"
+  core:
+    telemetryConsent: "limited"
+    themes: [
+      "nucleus-dark-ui"
+      "gruvbox"
+    ]
+  editor:
+    fontFamily: "Fira Code"
+    softWrapAtPreferredLineLength: true
+  "exception-reporting":
+    userId: "961ace79-3f80-ecfb-f929-487f389ceb3e"
+  latex:
+    enableShellEscape: true
+    engine: "lualatex"
+    opener: "pdf-view"
+    outputDirectory: "out"
+  "tool-bar":
+    iconSize: "16px"
+    position: "Left"
+  welcome:
+    showOnStartup: false
+".c.source":
+  editor:
+    tabLength: 4
+".cpp.source":
+  editor:
+    tabLength: 4

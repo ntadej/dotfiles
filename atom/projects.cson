@@ -1,0 +1,32 @@
+[
+  {
+    title: "AFS"
+    group: "Work"
+    paths: [
+      "/afs/cern.ch/work/t/tadej"
+      "/afs/cern.ch/user/t/tadej"
+      "/Users/tadej/Workspace/ROOT/AtlasStyle"
+    ]
+  }
+  {
+    title: "Dotfiles"
+    group: "Personal"
+    paths: [
+      "/Users/tadej/Workspace/dotfiles"
+    ]
+  }
+  {
+    title: "KDetSim"
+    group: "IJS"
+    paths: [
+      "/Users/tadej/Workspace/ROOT/KDetSim"
+    ]
+  }
+  {
+    title: "TNAnalysis"
+    group: "Work"
+    paths: [
+      "/mnt/f9/afs/f9.ijs.si/home/tadej/analysis/TNAnalysis"
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
