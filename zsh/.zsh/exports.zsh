@@ -1,7 +1,8 @@
 # Based on http://zanshin.net/2013/02/02/zsh-configuration-from-the-ground-up/
-# Currently this path is appended to dynamically when picking a ruby version
-# zshenv has already started PATH with rbenv so append only here
-#export PATH=$PATH~/bin:/usr/local/bin:/usr/local/sbin:~/bin
+# macOS system python
+if [[ $IS_MAC -eq 1 ]]; then
+	export PATH=~/Library/Python/2.7/bin:$PATH
+fi
 
 # remove duplicate entries
 typeset -U PATH
@@ -24,8 +25,7 @@ export ARCHFLAGS='-arch x86_64'
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
 if [[ $IS_MAC -eq 1 ]]; then
-    export EDITOR='atom'
-
+	export EDITOR='atom'
 	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 fi
 

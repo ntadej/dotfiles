@@ -10,26 +10,26 @@ zstyle ':vcs_info:*' unstagedstr "%{$fg[red]%}✘%{$reset_color%}"
 zstyle ':vcs_info:*' actionformats "%s→%b (%c%u) %a"
 # Hooks
 function +vi-git-untracked() {
-    # Show if untracked files are present in git
-    local untracked
+	# Show if untracked files are present in git
+	local untracked
 
-    untracked=${$(git ls-files --exclude-standard --others | head -n 1)}
-    if [[ -n ${untracked} ]] ; then
-        hook_com[unstaged]+=" %{$fg[yellow]%}✚%{$reset_color%}"
-    fi
+	untracked=${$(git ls-files --exclude-standard --others | head -n 1)}
+	if [[ -n ${untracked} ]] ; then
+		hook_com[unstaged]+=" %{$fg[yellow]%}✚%{$reset_color%}"
+	fi
 }
 function +vi-git-st() {
-    # Show difference between local and remote
-    local ahead behind remote
-    local -a gitstatus
+	# Show difference between local and remote
+	local ahead behind remote
+	local -a gitstatus
 
-    # Check for remote branch
-    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} --symbolic-full-name --abbrev-ref 2> /dev/null)}
-    if [[ -n ${remote} ]] ; then
-        ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2> /dev/null | wc -l)
-        (( $ahead )) && gitstatus+=( " %{$fg[green]%}↑${ahead// /}%{$reset_color%}" )
-        behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} | wc -l)
-        (( $behind )) && gitstatus+=( "%{$fg[red]%}↓${behind// /}%{$reset_color%}" )
-        hook_com[branch]+="%{$reset_color%} %{$fg[cyan]%}:: ${remote}${(j: :)gitstatus}%{$fg[cyan]%}"
-    fi
+	# Check for remote branch
+	remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} --symbolic-full-name --abbrev-ref 2> /dev/null)}
+	if [[ -n ${remote} ]] ; then
+		ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2> /dev/null | wc -l)
+		(( $ahead )) && gitstatus+=( " %{$fg[green]%}↑${ahead// /}%{$reset_color%}" )
+		behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} | wc -l)
+		(( $behind )) && gitstatus+=( "%{$fg[red]%}↓${behind// /}%{$reset_color%}" )
+		hook_com[branch]+="%{$reset_color%} %{$fg[cyan]%}:: ${remote}${(j: :)gitstatus}%{$fg[cyan]%}"
+	fi
 }
