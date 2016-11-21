@@ -1,0 +1,7 @@
+Unix.*.Root.DynamicPath:    .:$(ROOTSYS)/lib:$(HOME)/Workspace/ROOT/lib:
+Unix.*.Root.MacroPath:	    .:$(ROOTSYS)/macros:$(HOME)/Workspace/ROOT:
+
+Root.ShowPath: false
+
+Rint.Logon:                 $(HOME)/Workspace/ROOT/rootlogon.c
+
