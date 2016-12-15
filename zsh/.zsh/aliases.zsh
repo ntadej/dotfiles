@@ -13,18 +13,18 @@ alias projects='~/Workspace/Projects/'
 # directory information
 # -------------------------------------------------------------------
 if [[ $IS_MAC -eq 1 ]]; then
-		alias lh='ls -d .*' # show hidden files/directories only
-		alias l='ls -Al'
+	alias lh='ls -d .*' # show hidden files/directories only
+	alias l='ls -Al'
 	alias la='ls -A'
-		alias ls='ls -GFh' # Colorize output, add file type indicator, and put sizes in human readable format
-		alias ll='ls -GFhl' # Same as above, but in long listing format
+	alias ls='ls -GFh' # Colorize output, add file type indicator, and put sizes in human readable format
+	alias ll='ls -GFhl' # Same as above, but in long listing format
 fi
 if [[ $IS_LINUX -eq 1 ]]; then
-		alias lh='ls -d .* --color' # show hidden files/directories only
-		alias l='ls -Al --color'
+	alias lh='ls -d .* --color' # show hidden files/directories only
+	alias l='ls -Al --color'
 	alias la='ls -A --color'
-		alias ls='ls -Fh --color' # Colorize output, add file type indicator, and put sizes in human readable format
-		alias ll='ls -Fhl --color' # Same as above, but in long listing format
+	alias ls='ls -Fh --color' # Colorize output, add file type indicator, and put sizes in human readable format
+	alias ll='ls -Fhl --color' # Same as above, but in long listing format
 fi
 
 alias lsd="ls -ld *" # show directories
@@ -33,6 +33,8 @@ alias 'dirdus=du -sckx * | sort -nr' #directories sorted by size
 alias 'dus=du -kx | sort -nr | less' #files sorted by size
 
 alias 'filecount=find . -type f | wc -l' # number of files (not directories)
+
+alias root='root -l' # load ROOT without splash screen
 
 # these require zsh
 alias ltd='ls *(m0)' # files & directories modified in last day
