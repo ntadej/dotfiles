@@ -11,10 +11,15 @@ function init-root()
 # SSH
 function lxplus()
 {
-	sshold -Y lxplus$1.cern.ch -o gssapitrustdns=yes -o UserKnownHostsFile=~/.ssh/known_lxplus
+	sshold -Y lxplus$1.cern.ch -o gssapitrustdns=yes -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config
 }
 
 function f9()
 {
-	ssh f9pc$1.ijs.si -o UserKnownHostsFile=~/.ssh/known_f9
+	if [[ -z ${1+x} ]]; then
+		pc=34
+	else
+		pc=$1
+	fi
+	ssh -Y f9pc${pc}.ijs.si -o UserKnownHostsFile=~/.ssh/known_f9
 }
