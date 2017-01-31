@@ -31,10 +31,14 @@ fi
 
 export NVM_DIR="$HOME/.nvm"
 
+# CERN scripts
+if [[ -d "$HOME/Workspace/CERNscripts" ]]; then
+	export PATH="$HOME/Workspace/CERNscripts/bin:$PATH"
+fi
+
 # lxplus specials
 if [[ $IS_LXPLUS -eq 1 ]]; then
 	export RUCIO_ACCOUNT=tadej
-	export PATH=$PATH:~/private/dotfiles/scripts/lxplus
 else
 	export LOCAL_ROOT_DIR=/opt/root/current
 fi
