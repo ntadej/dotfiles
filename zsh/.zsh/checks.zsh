@@ -12,6 +12,10 @@ if [[ -n `alias setupATLAS 2> /dev/null` ]]; then
 	IS_LXPLUS=1
 fi
 
+if [[ ! -z ${SINGULARITY_CONTAINER+x} ]]; then
+	IS_SINGULARITY=1
+fi
+
 if [[ -x `which brew 2> /dev/null` ]]; then
 	HAS_BREW=1
 fi
