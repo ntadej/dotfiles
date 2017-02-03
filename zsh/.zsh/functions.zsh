@@ -23,3 +23,12 @@ function f9()
 	fi
 	ssh -Y f9pc${pc}.ijs.si -o UserKnownHostsFile=~/.ssh/known_f9
 }
+
+# ATLAS
+function setupATLAS()
+{
+	if [[ -z ${ATLAS_LOCAL_ROOT_BASE+x} ]]; then
+		export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
+	fi
+	source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh
+}

@@ -36,8 +36,8 @@ if [[ -d "$HOME/Workspace/CERNscripts" ]]; then
 	export PATH="$HOME/Workspace/CERNscripts/bin:$PATH"
 fi
 
-# lxplus specials
-if [[ $IS_LXPLUS -eq 1 ]]; then
+# lxplus/ATLAS specials
+if [[ $IS_LXPLUS -eq 1 || $IS_SINGULARITY -eq 1 ]]; then
 	export RUCIO_ACCOUNT=tadej
 else
 	export LOCAL_ROOT_DIR=/opt/root/current
