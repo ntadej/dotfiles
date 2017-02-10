@@ -14,6 +14,8 @@
     ]
   editor:
     fontFamily: "Fira Code"
+    preferredLineLength: 100
+    softWrap: true
     softWrapAtPreferredLineLength: true
   "exception-reporting":
     userId: "961ace79-3f80-ecfb-f929-487f389ceb3e"
@@ -27,7 +29,25 @@
     position: "Left"
   welcome:
     showOnStartup: false
+".c.cmake.source.template":
+  editor:
+    tabLength: 4
 ".c.source":
+  editor:
+    tabLength: 4
+".cache.cmake.source":
+  editor:
+    tabLength: 4
+".cmake.cpp.source.template":
+  editor:
+    tabLength: 4
+".cmake.shell.source.template":
+  editor:
+    tabLength: 24
+".cmake.source":
+  editor:
+    tabLength: 4
+".cmake.source.template":
   editor:
     tabLength: 4
 ".cpp.source":

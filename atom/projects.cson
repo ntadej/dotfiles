@@ -1,18 +1,35 @@
 [
   {
-    title: "AFS"
-    group: "Work"
-    paths: [
-      "/afs/cern.ch/work/t/tadej"
-      "/afs/cern.ch/user/t/tadej"
-      "/Users/tadej/Workspace/ROOT/AtlasStyle"
-    ]
-  }
-  {
     title: "Dotfiles"
     group: "Personal"
     paths: [
       "/Users/tadej/Workspace/dotfiles"
+    ]
+  }
+  {
+    title: "ATLAS Simulation - Pileup"
+    group: "CERN"
+    paths: [
+      "/afs/cern.ch/user/t/tadej/work/pileup"
+      "/afs/cern.ch/work/t/tadej/athena"
+      "/afs/cern.ch/work/t/tadej/simulation/pileup"
+    ]
+    settings:
+      whitespace:
+        removeTrailingWhitespace: false
+  }
+  {
+    title: "CERN Scripts"
+    group: "CERN"
+    paths: [
+      "/Users/tadej/Workspace/CERNscripts"
+    ]
+  }
+  {
+    title: "TNAnalysis"
+    group: "CERN"
+    paths: [
+      "/afs/f9.ijs.si/home/tadej/analysis/TNAnalysis"
     ]
   }
   {
@@ -23,10 +40,17 @@
     ]
   }
   {
-    title: "TNAnalysis"
-    group: "Work"
+    title: "SiliconAngleSim"
+    group: "IJS"
     paths: [
-      "/mnt/f9/afs/f9.ijs.si/home/tadej/analysis/TNAnalysis"
+      "/Users/tadej/Workspace/ROOT/SiliconAngleSim"
+    ]
+  }
+  {
+    title: "CERN Scripts AFS"
+    group: "CERN"
+    paths: [
+      "/afs/f9.ijs.si/home/tadej/Workspace/CERNscripts"
     ]
   }
 ]
