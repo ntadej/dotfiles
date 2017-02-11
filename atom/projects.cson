@@ -26,6 +26,13 @@
     ]
   }
   {
+    title: "CERN Scripts AFS"
+    group: "CERN"
+    paths: [
+      "/afs/f9.ijs.si/home/tadej/Workspace/CERNscripts"
+    ]
+  }
+  {
     title: "TNAnalysis"
     group: "CERN"
     paths: [
@@ -47,10 +54,43 @@
     ]
   }
   {
-    title: "CERN Scripts AFS"
-    group: "CERN"
+    title: "Tano.si"
+    group: "Web"
     paths: [
-      "/afs/f9.ijs.si/home/tadej/Workspace/CERNscripts"
+      "/Users/tadej/Workspace/Web/Tano/tano.si"
+      "/Users/tadej/Workspace/Web/Tano/tano-style"
+    ]
+  }
+  {
+    title: "Joda Backend"
+    group: "Web"
+    paths: [
+      "/Users/tadej/Workspace/Web/Joda/backend/joda-backend"
+      "/Users/tadej/Workspace/Web/Joda/backend/joda-backend-misc"
+      "/Users/tadej/Workspace/Web/Joda/backend/joda-backend-articles"
+    ]
+    settings:
+      "*":
+        "linter-pylint":
+          executable: "%p/../venv/bin/pylint"
+          pythonPath: "%p/../joda-backend"
+  }
+  {
+    title: "Joda Frontend"
+    group: "Web"
+    paths: [
+      "/Users/tadej/Workspace/Web/Joda/frontend/joda"
+      "/Users/tadej/Workspace/Web/Joda/frontend/joda-core"
+      "/Users/tadej/Workspace/Web/Joda/frontend/joda-misc"
+      "/Users/tadej/Workspace/Web/Joda/frontend/joda-articles"
+    ]
+  }
+  {
+    title: "Joda Webpage"
+    group: "Web"
+    paths: [
+      "/Users/tadej/Workspace/Web/Joda/joda.tano.si"
+      "/Users/tadej/Workspace/Web/Tano/tano-style"
     ]
   }
 ]

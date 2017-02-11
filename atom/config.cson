@@ -6,6 +6,14 @@
       default_beautifier: "clang-format"
     general:
       _analyticsUserId: "c42e44a3-ffc0-49d8-9cc6-21041f0f5938"
+    html:
+      indent_size: 2
+    js:
+      indent_size: 2
+    json:
+      indent_size: 2
+    sass:
+      beautify_on_save: true
   core:
     telemetryConsent: "limited"
     themes: [
@@ -24,6 +32,10 @@
     engine: "lualatex"
     opener: "pdf-view"
     outputDirectory: "out"
+  minimap:
+    plugins:
+      pigments: true
+      pigmentsDecorationsZIndex: 0
   "tool-bar":
     iconSize: "16px"
     position: "Left"
