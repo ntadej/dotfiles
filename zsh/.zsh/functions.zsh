@@ -14,6 +14,11 @@ function lxplus()
 	sshold lxplus$1.cern.ch -o gssapitrustdns=yes -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus
 }
 
+function lxplus7()
+{
+	sshold lxplus7.cern.ch -o gssapitrustdns=yes -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus
+}
+
 function f9()
 {
 	if [[ -z ${1+x} ]]; then
@@ -21,7 +26,7 @@ function f9()
 	else
 		pc=$1
 	fi
-	ssh f9pc${pc}.ijs.si -o UserKnownHostsFile=~/.ssh/known_f9
+	ssh f9pc${pc}.ijs.si -o UserKnownHostsFile=~/.ssh/known_f9 ${2}
 }
 
 # ATLAS
