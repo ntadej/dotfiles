@@ -26,7 +26,7 @@ function f9()
 	else
 		pc=$1
 	fi
-	ssh f9pc${pc}.ijs.si -o UserKnownHostsFile=~/.ssh/known_f9 ${2}
+	ssh f9pc${pc}.ijs.si -o UserKnownHostsFile=~/.ssh/known_f9 ${@:2}
 }
 
 # ATLAS

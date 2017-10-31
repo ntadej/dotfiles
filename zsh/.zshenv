@@ -3,4 +3,5 @@ if [ -x /usr/libexec/path_helper ]; then
 	PATH=''
 	eval `/usr/libexec/path_helper -s`
 	PATH='/usr/local/bin:'$PATH
+	PATH='/usr/local/sbin:'$PATH
 fi
