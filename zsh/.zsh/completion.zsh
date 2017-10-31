@@ -3,6 +3,7 @@
 fpath=(~/.zsh/zsh-completions/src $fpath)
 
 autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
 zmodload -i zsh/complist
 
 # Enable completion caching, use rehash to clear
