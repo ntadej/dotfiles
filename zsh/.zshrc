@@ -13,3 +13,7 @@ source ~/.zsh/prompt.zsh
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if [[ $IS_SINGULARITY -eq 1 ]]; then
+  source ~/.zlogin
+fi

@@ -11,7 +11,10 @@ init-root
 # travis gem
 [[ -f "$HOME/.travis/travis.sh" ]] && source "$HOME/.travis/travis.sh"
 
-# lxplus/ATLAS setup
-if [[ $IS_LXPLUS -eq 1 ]]; then
+# lxplus/singularity/ATLAS setup
+if [[ $IS_LXPLUS -eq 1 || $IS_SINGULARITY -eq 1 ]]; then
 	setupATLAS
 fi
+
+# local environment
+[[ -f "$HOME/.environment" ]] && source "$HOME/.environment"
