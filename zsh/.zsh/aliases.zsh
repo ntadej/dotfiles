@@ -41,6 +41,9 @@ alias ltd='ls *(m0)' # files & directories modified in last day
 alias lt='ls *(.m0)' # files (no directories) modified in last day
 alias lnew='ls *(.om[1,3])' # list three newest
 
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
 # -------------------------------------------------------------------
 # Mac only
 # -------------------------------------------------------------------
@@ -48,11 +51,26 @@ if [[ $IS_MAC -eq 1 ]]; then
 	alias ql='qlmanage -p 2>/dev/null' # OS X Quick Look
 
 	# Useful Mac aliases
-	alias flushdns="sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say DNS cache flushed"
+	# Flush Directory Service cache
+	alias flushdns="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+	# Clean up LaunchServices to remove duplicates in the “Open With” menu
+	alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+	# Clean up download cache
 	alias deletedownloadcache="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
+	# Clear preferences cache
 	alias clearprefcache="killall -u tadej cfprefsd"
 
-	alias inkscape=/Applications/InkscapeConsole.app/Contents/Resources/bin/inkscape
+	# macOS has no `md5sum`, so use `md5` as a fallback
+	command -v md5sum > /dev/null || alias md5sum="md5"
+
+	# macOS has no `sha1sum`, so use `shasum` as a fallback
+	command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+	# Recursively delete `.DS_Store` files
+	alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 fi
 
 # -------------------------------------------------------------------
