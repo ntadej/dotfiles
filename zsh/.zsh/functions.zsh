@@ -11,12 +11,12 @@ function init-root()
 # SSH
 function lxplus()
 {
-	sshold lxplus$1.cern.ch -o gssapitrustdns=yes -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus
+	ssh lxplus$1.cern.ch -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus ${@:2}
 }
 
 function lxplus7()
 {
-	sshold lxplus7.cern.ch -o gssapitrustdns=yes -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus
+	ssh lxplus7.cern.ch -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus
 }
 
 function f9()
