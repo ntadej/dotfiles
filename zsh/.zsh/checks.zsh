@@ -8,7 +8,7 @@ if [[ $(uname) = 'Darwin' ]]; then
 	IS_MAC=1
 fi
 
-if [[ -n `alias setupATLAS 2> /dev/null` ]]; then
+if [[ `hostname` = 'lxplus'* ]]; then
 	IS_LXPLUS=1
 fi
 
