@@ -4,6 +4,10 @@ if [[ $IS_MAC -eq 1 ]]; then
 	export PATH=~/Library/Python/2.7/bin:$PATH
 fi
 
+if [[ -d $HOME/bin ]]; then
+	export PATH=$HOME/bin:$PATH
+fi
+
 # remove duplicate entries
 typeset -U PATH
 
