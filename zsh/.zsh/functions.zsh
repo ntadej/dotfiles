@@ -11,16 +11,28 @@ function init-root()
 # SSH
 function lxplus()
 {
+	if [[ $IS_MAC ]]; then
+		kswitch -p tadej@CERN.CH
+	fi
+
 	ssh lxplus$1.cern.ch -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus ${@:2}
 }
 
 function lxplus7()
 {
-	ssh lxplus7.cern.ch -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus
+	if [[ $IS_MAC ]]; then
+		kswitch -p tadej@CERN.CH
+	fi
+
+	ssh lxplus7.cern.ch -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus ${@:1}
 }
 
 function f9()
 {
+	if [[ $IS_MAC ]]; then
+		kswitch -p tadej@F9.IJS.SI
+	fi
+
 	if [[ -z ${1+x} ]]; then
 		pc=19
 	else
