@@ -13,3 +13,5 @@ source ~/.zsh/prompt.zsh
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source ~/.zsh/iterm2_shell_integration.zsh
