@@ -29,6 +29,8 @@
 	# Find tags containing commit
 	ft = "!f() { git describe --always --contains $1; }; f"
 
+	# Find untracked branches that used to be on origin
+	ut = "!f() { git branch -vv | grep origin | grep ': gone' | awk '{print $1}'; }; f"
 [color]
 	ui = true
 
@@ -37,7 +39,7 @@
 	gpgsign = true
 
 [core]
-	editor = vim
+	editor = nano
 	excludesfile = ~/.gitignore
 
 [help]
