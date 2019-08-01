@@ -9,7 +9,7 @@ if [[ -d $HOME/bin ]]; then
 fi
 
 # remove duplicate entries
-typeset -U PATH
+# typeset -U PATH
 
 # Add fpath
 if [[ $IS_MAC -eq 1 ]]; then
@@ -33,7 +33,9 @@ if [[ $IS_MAC -eq 1 ]]; then
 	export GREP_COLOR='3;33'
 fi
 
-export NVM_DIR="$HOME/.nvm"
+if [[ -d "$HOME/.nvm" ]]; then
+	export NVM_DIR="$HOME/.nvm"
+fi
 
 # CERN scripts
 if [[ -d "$HOME/Workspace/CERNscripts" ]]; then
