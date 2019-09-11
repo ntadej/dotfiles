@@ -11,7 +11,7 @@ function init-root()
 # SSH
 function lxplus()
 {
-	if [[ $IS_MAC ]]; then
+	if [[ $IS_MAC -eq 1 ]]; then
 		kswitch -p tadej@CERN.CH
 	fi
 
@@ -20,7 +20,7 @@ function lxplus()
 
 function lxplus7()
 {
-	if [[ $IS_MAC ]]; then
+	if [[ $IS_MAC -eq 1 ]]; then
 		kswitch -p tadej@CERN.CH
 	fi
 
@@ -29,7 +29,7 @@ function lxplus7()
 
 function f9()
 {
-	if [[ $IS_MAC ]]; then
+	if [[ $IS_MAC -eq 1 ]]; then
 		kswitch -p tadej@F9.IJS.SI
 	fi
 
