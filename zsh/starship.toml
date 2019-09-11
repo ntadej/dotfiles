@@ -1,0 +1,23 @@
+# Disable the newline at the start of the prompt
+add_newline = false
+
+# Overwrite a default_prompt_order and  use custom prompt_order
+prompt_order=["rust","line_break","package","line_break","character"]
+
+
+[character]
+use_symbol_for_status = true
+
+[git_status]
+modified = "+"
+staged = "✔"
+show_sync_count = true
+
+[golang]
+disabled = true
+
+[jobs]
+threshold = 0
+
+[rust]
+disabled = true
