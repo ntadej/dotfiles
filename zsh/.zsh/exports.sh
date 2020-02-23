@@ -23,6 +23,16 @@ fi
 # Setup terminal
 export TERM=xterm-256color
 
+# Export hostname
+HOSTNAME=$(hostname)
+export HOSTNAME
+
+# gnupg
+if [[ -S "/run/user/$(id -u)/gnupg/S.gpg-agent" ]]; then
+  GNUPG_AGENT_SOCKET="/run/user/$(id -u)/gnupg/S.gpg-agent"
+  export GNUPG_AGENT_SOCKET
+fi
+
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
 export ARCHFLAGS='-arch x86_64'
 
