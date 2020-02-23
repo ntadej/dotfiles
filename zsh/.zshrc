@@ -16,6 +16,7 @@ source ~/.zsh/completion.sh
 source ~/.zsh/aliases.sh
 
 source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.zsh/prompt.sh
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

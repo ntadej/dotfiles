@@ -9,6 +9,17 @@ function init-root()
  fi
 }
 
+# Singularity
+if [[ ! $IS_SINGULARITY -eq 1 ]]; then
+  function centos7()
+  {
+    # Use singularity
+    if [[ -n ${SINGULARITY_CENTOS7+x} ]]; then
+      $SINGULARITY_CENTOS7 /bin/zsh -l
+    fi
+  }
+fi
+
 # SSH
 function lxplus()
 {

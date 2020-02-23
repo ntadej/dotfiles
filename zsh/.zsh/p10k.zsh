@@ -2,7 +2,7 @@
 # Based on romkatv/powerlevel10k/config/p10k-rainbow.zsh, checksum 34102.
 # Wizard options: nerdfont-complete + powerline, small icons, rainbow, time,
 # slanted separators, slanted heads, slanted tails, 2 lines, disconnected, no frame,
-# sparse, many icons, fluent, transient_prompt, instant_prompt=verbose.
+# sparse, many icons, concise, transient_prompt, instant_prompt=verbose.
 # Type `p10k configure` to generate another config.
 #
 # Config for Powerlevel10k with powerline prompt style with colorful background.
@@ -38,6 +38,8 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     os_icon                 # os identifier
+    context                 # user@hostname
+    singularity             # singularity detection
     dir                     # current directory
     vcs                     # git status
     # =========================[ Line #2 ]=========================
@@ -83,7 +85,7 @@
     azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
     gcloud                  # google cloud cli account and project (https://cloud.google.com/)
     google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
-    context                 # user@hostname
+    # context                 # user@hostname
     nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
     ranger                  # ranger shell (https://github.com/ranger/ranger)
     nnn                     # nnn shell (https://github.com/jarun/nnn)
@@ -484,7 +486,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_VCS_PREFIX='on '
+  # typeset -g POWERLEVEL9K_VCS_PREFIX='on '
 
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
@@ -545,7 +547,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='took '
+  # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='took '
 
   #######################[ background_jobs: presence of background jobs ]#######################
   # Background jobs color.
@@ -879,14 +881,14 @@
 
   ##################################[ context: user@hostname ]##################################
   # Context color when running with privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=1
   # Context color in SSH without privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=3
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=6
   # Default context color (no privileges, no SSH).
-  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=3
-  typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=6
 
   # Context format when running with privileges: user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n@%m'
@@ -902,7 +904,11 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_CONTEXT_PREFIX='with '
+  # typeset -g POWERLEVEL9K_CONTEXT_PREFIX='with '
+
+  ##################################[ singularity ]##################################
+  typeset -g POWERLEVEL9K_SINGULARITY_FOREGROUND=0
+  typeset -g POWERLEVEL9K_SINGULARITY_BACKGROUND=14
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
@@ -1226,7 +1232,7 @@
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
   # Custom prefix.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='at '
+  # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='at '
 
   #[ aws: aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) ]#
   # Show aws only when the the command you are typing invokes one of these tools.
@@ -1462,7 +1468,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_TIME_PREFIX='at '
+  # typeset -g POWERLEVEL9K_TIME_PREFIX='at '
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
