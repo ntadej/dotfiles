@@ -1,5 +1,7 @@
 # Based on http://zanshin.net/2013/02/02/zsh-configuration-from-the-ground-up/
 # Add extra completions
+:
+# shellcheck disable=SC2206
 fpath=(~/.zsh/zsh-completions/src $fpath)
 
 autoload -U compinit && compinit
@@ -8,10 +10,10 @@ zmodload -i zsh/complist
 
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+zstyle ':completion::complete:*' cache-path "$HOME/.zsh/cache/$HOST"
 
 # Fallback to built in ls colors
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Make the list prompt friendly
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'

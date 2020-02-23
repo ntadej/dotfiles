@@ -13,7 +13,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 if [[ -o interactive ]]; then
-  if [ "${ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX-}""$TERM" != "screen" -a "${ITERM_SHELL_INTEGRATION_INSTALLED-}" = "" -a "$TERM" != linux -a "$TERM" != dumb ]; then
+  if [[ "${ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX-}""$TERM" != "screen" && "${ITERM_SHELL_INTEGRATION_INSTALLED-}" = "" && "$TERM" != linux && "$TERM" != dumb ]]; then
     ITERM_SHELL_INTEGRATION_INSTALLED=Yes
     ITERM2_SHOULD_DECORATE_PROMPT="1"
     # Indicates start of command output. Runs just before command executes.
@@ -22,6 +22,7 @@ if [[ -o interactive ]]; then
     }
 
     iterm2_set_user_var() {
+      # shellcheck disable=SC2046
       printf "\033]1337;SetUserVar=%s=%s\007" "$1" $(printf "%s" "$2" | base64 | tr -d '\n')
     }
 
@@ -30,9 +31,9 @@ if [[ -o interactive ]]; then
     # e.g., iterm2_set_user_var currentDirectory $PWD
     # Accessible in iTerm2 (in a badge now, elsewhere in the future) as
     # \(user.currentDirectory).
-    whence -v iterm2_print_user_vars > /dev/null 2>&1
-    if [ $? -ne 0 ]; then
+    if ! whence -v iterm2_print_user_vars > /dev/null 2>&1; then
       iterm2_print_user_vars() {
+        true;
       }
     fi
 
@@ -139,17 +140,19 @@ if [[ -o interactive ]]; then
     }
 
     # If hostname -f is slow on your system, set iterm2_hostname prior to sourcing this script.
-    [[ -z "${iterm2_hostname-}" ]] && iterm2_hostname=`hostname -f 2>/dev/null`
+    [[ -z "${iterm2_hostname-}" ]] && iterm2_hostname=$(hostname -f 2>/dev/null)
     # some flavors of BSD (i.e. NetBSD and OpenBSD) don't have the -f option
-    if [ $? -ne 0 ]; then
-      iterm2_hostname=`hostname`
-    fi
+    # if [ $? -ne 0 ]; then
+    #   iterm2_hostname=$(hostname)
+    # fi
 
     [[ -z ${precmd_functions-} ]] && precmd_functions=()
-    precmd_functions=($precmd_functions iterm2_precmd)
+    # shellcheck disable=SC2206
+    precmd_functions+=(iterm2_precmd)
 
     [[ -z ${preexec_functions-} ]] && preexec_functions=()
-    preexec_functions=($preexec_functions iterm2_preexec)
+    # shellcheck disable=SC2206
+    preexec_functions+=(iterm2_preexec)
 
     iterm2_print_state_data
     printf "\033]1337;ShellIntegrationVersion=9;shell=zsh\007"
