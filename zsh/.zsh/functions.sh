@@ -1,3 +1,15 @@
+function copy_function()
+{
+  test -n "$(declare -f "$1")" || return 
+  eval "${_/$1/$2}"
+}
+
+function rename_function()
+{
+  copy_function "$@" || return
+  unset -f "$1"
+}
+
 # Root
 function init-root()
 {
@@ -49,9 +61,31 @@ function f9()
 function setupATLAS()
 {
   if [[ -z ${ATLAS_LOCAL_ROOT_BASE+x} ]]; then
-	export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
+	  export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
   fi
 
   # shellcheck disable=SC1090
   source "${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh"
+
+  rename_function asetup asetup_orig
+
+  function asetup()
+  {
+    asetup_orig "${@}"
+    unset LC_ALL
+    export LANG=C
+    export LC_CTYPE="C.UTF-8"
+    export LC_NUMERIC=C
+    export LC_TIME=C
+    export LC_COLLATE=C
+    export LC_MONETARY=C
+    export LC_MESSAGES=C
+    export LC_PAPER=C
+    export LC_NAME=C
+    export LC_ADDRESS=C
+    export LC_TELEPHONE=C
+    export LC_MEASUREMENT=C
+    export LC_IDENTIFICATION=C
+    locale > /dev/null
+  }
 }
