@@ -66,26 +66,4 @@ function setupATLAS()
 
   # shellcheck disable=SC1090
   source "${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh"
-
-  rename_function asetup asetup_orig
-
-  function asetup()
-  {
-    asetup_orig "${@}"
-    unset LC_ALL
-    export LANG=C
-    export LC_CTYPE="C.UTF-8"
-    export LC_NUMERIC=C
-    export LC_TIME=C
-    export LC_COLLATE=C
-    export LC_MONETARY=C
-    export LC_MESSAGES=C
-    export LC_PAPER=C
-    export LC_NAME=C
-    export LC_ADDRESS=C
-    export LC_TELEPHONE=C
-    export LC_MEASUREMENT=C
-    export LC_IDENTIFICATION=C
-    locale > /dev/null
-  }
 }

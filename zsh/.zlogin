@@ -7,6 +7,9 @@ command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 # nvm
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
 
+# poetry
+[[ -s "$HOME/.poetry/bin/poetry" ]] && export PATH="$HOME/.poetry/bin:$PATH"
+
 # Root
 init-root
 

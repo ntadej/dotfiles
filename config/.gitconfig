@@ -41,6 +41,7 @@
 [core]
 	editor = nano
 	excludesfile = ~/.gitignore
+	pager = delta
 
 [help]
 	# Automatically correct and execute mistyped commands
@@ -71,3 +72,9 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[rebase]
+	autoStash = true
+
+[delta]
+	side-by-side = true
