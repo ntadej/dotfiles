@@ -11,7 +11,9 @@ command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 [[ -s "$HOME/.poetry/bin/poetry" ]] && export PATH="$HOME/.poetry/bin:$PATH"
 
 # Root
-init-root
+if [[ $IS_MAC -eq 1 ]]; then
+  init-root
+fi
 
 # lxplus/singularity/ATLAS setup
 if [[ $IS_LXPLUS -eq 1 || $IS_SINGULARITY -eq 1 ]]; then
