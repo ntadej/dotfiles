@@ -1,0 +1,98 @@
+#!/bin/bash
+
+set -x
+
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.local/share/man/man1"
+mkdir -p "$HOME/.local/share/zsh/site-functions"
+
+mkdir -p "/tmp/$USER/rust"
+pushd "/tmp/$USER/rust" || exit 1
+echo
+
+echo "bat"
+curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
+  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf bat-*
+rm -- *.tar.gz
+
+pushd bat-* || exit 1
+cp bat ~/.local/bin/bat
+cp bat.1 ~/.local/share/man/man1/bat.1
+cp autocomplete/bat.zsh ~/.local/share/zsh/site-functions/_bat
+popd || exit 1
+
+echo
+
+echo "delta"
+curl -s https://api.github.com/repos/dandavison/delta/releases/latest \
+  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf delta-*
+rm -- *.tar.gz
+
+pushd delta-* || exit 1
+cp delta ~/.local/bin/delta
+popd || exit 1
+
+echo
+
+echo "dust"
+curl -s https://api.github.com/repos/bootandy/dust/releases/latest \
+  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf dust-*
+rm -- *.tar.gz
+
+pushd dust-* || exit 1
+cp dust ~/.local/bin/dust
+popd || exit 1
+
+echo
+
+echo "fd"
+curl -s https://api.github.com/repos/sharkdp/fd/releases/latest \
+  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf fd-*
+rm -- *.tar.gz
+
+pushd fd-* || exit 1
+cp fd ~/.local/bin/fd
+cp fd.1 ~/.local/share/man/man1/fd.1
+cp autocomplete/_fd ~/.local/share/zsh/site-functions/_fd
+popd || exit 1
+
+echo
+
+echo "ripgrep"
+curl -s https://api.github.com/repos/BurntSushi/ripgrep/releases/latest \
+  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf ripgrep-*
+rm -- *.tar.gz
+
+pushd ripgrep-* || exit 1
+cp rg ~/.local/bin/rg
+cp doc/rg.1 ~/.local/share/man/man1/rg.1
+cp complete/_rg ~/.local/share/zsh/site-functions/_rg
+popd || exit 1
+
+echo
+
+if [[ -d "/tmp/$USER/rust" ]]; then
+  rm -r "/tmp/$USER/rust"
+fi
+
+popd || exit 1
