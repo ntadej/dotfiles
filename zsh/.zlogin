@@ -22,10 +22,3 @@ fi
 
 # local environment
 [[ -f "$HOME/.environment" ]] && source "$HOME/.environment"
-
-# linuxbrew
-if [[ -d "$HOMEBREW_PREFIX" ]]; then
-  if [[ -s "$HOMEBREW_PREFIX/bin/brew" ]]; then
-    eval $("$HOMEBREW_PREFIX/bin/brew" shellenv)
-  fi
-fi

@@ -54,7 +54,16 @@ function f9()
 	  pc=$1
   fi
 
-  ssh "f9pc${pc}.ijs.si" -o UserKnownHostsFile=~/.ssh/known_f9 "${@:2}"
+  ssh -Y "f9pc${pc}.ijs.si" -o UserKnownHostsFile=~/.ssh/known_f9 "${@:2}"
+}
+
+function naf()
+{
+  if [[ $IS_MAC -eq 1 ]]; then
+    kswitch -p tadej@DESY.DE
+	fi
+
+  ssh -Y "naf-atlas${1}.desy.de" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
 }
 
 # ATLAS

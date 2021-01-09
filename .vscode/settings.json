@@ -1,0 +1,6 @@
+{
+    "shellcheck.useWorkspaceRootAsCwd": true,
+    "shellcheck.customArgs": [
+        "--shell=bash"
+    ]
+}

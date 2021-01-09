@@ -18,9 +18,10 @@ fi
 if [[ $IS_MAC -eq 1 ]]; then
   # shellcheck disable=SC2206
 	fpath=('/usr/local/share/zsh/site-functions' $fpath)
-elif [[ -d "$HOMEBREW_PREFIX/share/zsh/site-functions" ]]; then
+fi
+if [[ -d "$HOME/.local/share/zsh/site-functions" ]]; then
   # shellcheck disable=SC2206 disable=SC2128
-	fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+	fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
 fi
 
 # Setup terminal
