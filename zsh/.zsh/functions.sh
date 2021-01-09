@@ -10,17 +10,6 @@ function rename_function()
   unset -f "$1"
 }
 
-# Root
-function init-root()
-{
- if [[ -s $LOCAL_ROOT_DIR ]]; then
-   pushd "$LOCAL_ROOT_DIR/bin" > /dev/null || exit
-   # shellcheck disable=SC1091
-   source thisroot.sh
-   popd > /dev/null || exit
- fi
-}
-
 # Singularity
 if [[ ! $IS_SINGULARITY -eq 1 ]]; then
   function centos7()
