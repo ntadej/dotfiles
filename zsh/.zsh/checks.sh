@@ -13,6 +13,10 @@ if [[ $(hostname) = 'lxplus'* ]]; then
   IS_LXPLUS=1
 fi
 
+if [[ $(hostname) = 'naf'* ]]; then
+  IS_NAF=1
+fi
+
 if [[ -n ${SINGULARITY_CONTAINER+x} ]]; then
   IS_SINGULARITY=1
 fi

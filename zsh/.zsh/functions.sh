@@ -16,7 +16,11 @@ if [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_CENTOS7+x} ]]; then
-      $SINGULARITY_CENTOS7 /bin/zsh -l
+      if [[ $IS_NAF -eq 1 ]]; then
+        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /nfs:/nfs --bind /pnfs:/pnfs "$SINGULARITY_CENTOS7" /bin/zsh -l
+      else
+        "$SINGULARITY_CENTOS7" /bin/zsh -l
+      fi
     fi
   }
 fi
