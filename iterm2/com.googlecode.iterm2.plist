@@ -596,6 +596,8 @@
 	<integer>262401</integer>
 	<key>IRMemory</key>
 	<integer>4</integer>
+	<key>MinimalSelectedTabUnderlineProminence</key>
+	<real>0.0</real>
 	<key>MinimalTabStyleBackgroundColorDifference</key>
 	<real>0.05000000074505806</real>
 	<key>MinimalTabStyleOutlineStrength</key>
@@ -1394,8 +1396,6 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
-	<key>PreventEscapeSequenceFromClearingHistory</key>
-	<false/>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>SeparateStatusBarsPerPane</key>
