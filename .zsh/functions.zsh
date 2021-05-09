@@ -1,17 +1,5 @@
-function copy_function()
-{
-  test -n "$(declare -f "$1")" || return 
-  eval "${_/$1/$2}"
-}
-
-function rename_function()
-{
-  copy_function "$@" || return
-  unset -f "$1"
-}
-
 # Singularity
-if [[ ! $IS_SINGULARITY -eq 1 ]]; then
+if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   function centos7()
   {
     # Use singularity
@@ -28,7 +16,7 @@ fi
 # SSH
 function lxplus()
 {
-  if [[ $IS_MAC -eq 1 ]]; then
+  if [[ $OSTYPE == darwin* ]]; then
 		kswitch -p tadej@CERN.CH
 	fi
 
@@ -37,7 +25,7 @@ function lxplus()
 
 function f9()
 {
-  if [[ $IS_MAC -eq 1 ]]; then
+  if [[ $OSTYPE == darwin* ]]; then
     kswitch -p tadej@F9.IJS.SI
 	fi
 
@@ -52,11 +40,15 @@ function f9()
 
 function naf()
 {
-  if [[ $IS_MAC -eq 1 ]]; then
+  if [[ $OSTYPE == darwin* ]]; then
     kswitch -p tadej@DESY.DE
 	fi
 
-  ssh -Y "naf-atlas${1}.desy.de" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
+  if [[ "${1}" == "dev" ]]; then
+    ssh -Y "naf-dev" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
+  else
+    ssh -Y "naf-atlas${1}.desy.de" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
+  fi
 }
 
 # ATLAS
@@ -66,6 +58,5 @@ function setupATLAS()
 	  export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
   fi
 
-  # shellcheck disable=SC1090
   source "${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh"
 }

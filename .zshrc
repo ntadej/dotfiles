@@ -52,6 +52,10 @@ path=(~/bin $path)
 # Export environment variables.
 export GPG_TTY=$TTY
 
+[[ $(hostname) = 'lxplus'* ]]       && IS_LXPLUS=1
+[[ $(hostname) = 'naf'* ]]          && IS_NAF=1
+[[ -n ${SINGULARITY_CONTAINER+x} ]] && IS_SINGULARITY=1
+
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
 
@@ -74,12 +78,10 @@ compdef _directories md
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
 
-# Define aliases.
-alias tree='tree -a -I .git'
-
-# Add flags to existing aliases.
-alias ls="${aliases[ls]:-ls} -A"
-
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
+
+# Source/compile files
+z4h source -c -- $ZDOTDIR/.zsh/{aliases.zsh,functions.zsh,prompt.zsh}
+z4h compile -- $ZDOTDIR/{.zshenv,.zshrc}
