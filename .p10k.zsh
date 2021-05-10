@@ -915,11 +915,6 @@
   # Custom prefix.
   # typeset -g POWERLEVEL9K_CONTEXT_PREFIX='with '
 
-  # Always show user if wrapped zsh
-  if [[ $CUSTOM_ZSH_VERSION -eq 1 ]]; then
-    typeset -g POWERLEVEL9K_ALWAYS_SHOW_USER=1
-  fi
-
   ##################################[ singularity ]##################################
   typeset -g POWERLEVEL9K_SINGULARITY_FOREGROUND=0
   typeset -g POWERLEVEL9K_SINGULARITY_BACKGROUND=14
