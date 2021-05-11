@@ -11,7 +11,7 @@ zstyle ':z4h:' auto-update-days '28'
 
 # Automaticaly wrap TTY with a transparent tmux ('integrated'), or start a
 # full-fledged tmux ('system'), or disable features that require tmux ('no').
-zstyle ':z4h:' start-tmux         'integrated'
+zstyle ':z4h:' start-tmux         'no'
 # Move prompt to the bottom when zsh starts up so that it's always in the
 # same position. Has no effect if start-tmux is 'no'.
 zstyle ':z4h:' prompt-at-bottom   'yes'
@@ -50,13 +50,21 @@ z4h init || return
 
 # Extend PATH.
 path=(~/.local/bin $path)
+if [[ -d /opt/ninja/1.10.1/Linux-x86_64 ]]; then
+  path=(/opt/ninja/1.10.1/Linux-x86_64 $path)
+fi
 
 # Export environment variables.
-export GPG_TTY=$TTY
-
+export HOSTNAME=$(hostname)
 [[ $(hostname) = 'lxplus'* ]]       && IS_LXPLUS=1
 [[ $(hostname) = 'naf'* ]]          && IS_NAF=1
 [[ -n ${SINGULARITY_CONTAINER+x} ]] && IS_SINGULARITY=1
+# GPG
+GNUPG_AGENT_SOCKET=$(gpgconf --list-dirs | grep agent-socket)
+GNUPG_AGENT_SOCKET=${GNUPG_AGENT_SOCKET//agent-socket:/}
+if [[ -S "$GNUPG_AGENT_SOCKET" ]]; then
+  export GNUPG_AGENT_SOCKET
+fi
 
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
