@@ -20,7 +20,11 @@ function lxplus()
 		kswitch -p tadej@CERN.CH
 	fi
 
-  ssh "lxplus${1}.cern.ch" -o UserKnownHostsFile=~/.ssh/known_lxplus -F ~/.ssh/config_lxplus "${@:2}"
+  if [[ "${1}" == "dev" ]]; then
+    ssh "lxplus-dev" -o UserKnownHostsFile=~/.ssh/known_lxplus "${@:2}"
+  else
+    ssh "lxplus${1}.cern.ch" -o UserKnownHostsFile=~/.ssh/known_lxplus "${@:2}"
+  fi
 }
 
 function f9()

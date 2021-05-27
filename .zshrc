@@ -50,6 +50,11 @@ z4h init || return
 
 # Extend PATH.
 path=(~/.local/bin $path)
+# poetry
+if [[ -s ~/.poetry/bin/poetry ]]; then
+  path=(~/.poetry/bin $path)
+fi
+# ninja
 if [[ -d /opt/ninja/1.10.1/Linux-x86_64 ]]; then
   path=(/opt/ninja/1.10.1/Linux-x86_64 $path)
 fi
@@ -64,6 +69,14 @@ GNUPG_AGENT_SOCKET=$(gpgconf --list-dirs | grep agent-socket)
 GNUPG_AGENT_SOCKET=${GNUPG_AGENT_SOCKET//agent-socket:/}
 if [[ -S "$GNUPG_AGENT_SOCKET" ]]; then
   export GNUPG_AGENT_SOCKET
+fi
+
+# Environment preservation when sourcing specific setup scripts
+function zrestart() ZRESTART_CMD="${(j: :)${(qq)@}}" exec zsh
+
+if [[ -v ZRESTART_CMD ]]; then
+  eval $ZRESTART_CMD
+  unset ZRESTART_CMD
 fi
 
 # Source additional local files if they exist.
