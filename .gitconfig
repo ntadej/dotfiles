@@ -31,6 +31,7 @@
 
 	# Find untracked branches that used to be on origin
 	ut = "!f() { git branch -vv | grep origin | grep ': gone' | awk '{print $1}'; }; f"
+
 [color]
 	ui = true
 
@@ -78,3 +79,6 @@
 
 [delta]
 	side-by-side = true
+
+[init]
+	defaultBranch = main
