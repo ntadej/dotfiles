@@ -21,6 +21,10 @@
 accounts=$(cat "$HOME/.kerberos")
 
 for account in $accounts; do
+  if [[ "$account" =~ ^#.*$ ]]; then
+    continue
+  fi
+
   echo "=== Setting up $account..."
   IFS='@'; list=($account); unset IFS;
   realm="${list[1]}"
