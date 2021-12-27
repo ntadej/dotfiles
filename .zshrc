@@ -90,6 +90,8 @@ if [[ -v ZRESTART_CMD ]]; then
 fi
 
 # Source additional local files if they exist.
+z4h source ~/.acme.sh/acme.sh.env
+z4h source ~/.cargo/env
 z4h source ~/.env.zsh
 
 # Define key bindings.
