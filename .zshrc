@@ -54,6 +54,9 @@ path=(~/.local/bin $path)
 if [[ -s ~/.poetry/bin/poetry ]]; then
   path=(~/.poetry/bin $path)
 fi
+if [[ -s /var/poetry/bin/poetry ]]; then
+  path=(/var/poetry/bin $path)
+fi
 # ninja
 if [[ -d /opt/ninja/1.10.1/Linux-x86_64 ]]; then
   path=(/opt/ninja/1.10.1/Linux-x86_64 $path)
