@@ -2,6 +2,13 @@
 
 set -x
 
+ARCH=$(uname -m)
+if [[ "$ARCH" = "aarch64" ]]; then
+  PLATFORM="aarch64-unknown-linux-gnu"
+else
+  PLATFORM="x86_64-unknown-linux-musl"
+fi
+
 mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.local/share/man/man1"
 mkdir -p "$HOME/.local/share/zsh/site-functions"
@@ -12,7 +19,7 @@ echo
 
 echo "bat"
 curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
-  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
+  | grep "browser_download_url.*${PLATFORM}.tar.gz" \
   | cut -d : -f 2,3 \
   | tr -d \" \
   | wget -qi -
@@ -29,7 +36,7 @@ echo
 
 echo "delta"
 curl -s https://api.github.com/repos/dandavison/delta/releases/latest \
-  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
+  | grep "browser_download_url.*${PLATFORM}.tar.gz" \
   | cut -d : -f 2,3 \
   | tr -d \" \
   | wget -qi -
@@ -42,37 +49,41 @@ popd || exit 1
 
 echo
 
-echo "dust"
-curl -s https://api.github.com/repos/bootandy/dust/releases/latest \
-  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
-  | cut -d : -f 2,3 \
-  | tr -d \" \
-  | wget -qi -
-tar xf dust-*
-rm -- *.tar.gz
+if [[ "$ARCH" != "aarch64" ]]; then
+  echo "dust"
+  curl -s https://api.github.com/repos/bootandy/dust/releases/latest \
+    | grep "browser_download_url.*${PLATFORM}.tar.gz" \
+    | cut -d : -f 2,3 \
+    | tr -d \" \
+    | wget -qi -
+  tar xf dust-*
+  rm -- *.tar.gz
 
-pushd dust-* || exit 1
-cp dust ~/.local/bin/dust
-popd || exit 1
+  pushd dust-* || exit 1
+  cp dust ~/.local/bin/dust
+  popd || exit 1
 
-echo
+  echo
+fi
 
-echo "fd"
-curl -s https://api.github.com/repos/sharkdp/fd/releases/latest \
-  | grep "browser_download_url.*x86_64-unknown-linux-musl.tar.gz" \
-  | cut -d : -f 2,3 \
-  | tr -d \" \
-  | wget -qi -
-tar xf fd-*
-rm -- *.tar.gz
+if [[ "$ARCH" != "aarch64" ]]; then  # binaries broken at the moment
+  echo "fd"
+  curl -s https://api.github.com/repos/sharkdp/fd/releases/latest \
+    | grep "browser_download_url.*${PLATFORM}.tar.gz" \
+    | cut -d : -f 2,3 \
+    | tr -d \" \
+    | wget -qi -
+  tar xf fd-*
+  rm -- *.tar.gz
 
-pushd fd-* || exit 1
-cp fd ~/.local/bin/fd
-cp fd.1 ~/.local/share/man/man1/fd.1
-cp autocomplete/_fd ~/.local/share/zsh/site-functions/_fd
-popd || exit 1
+  pushd fd-* || exit 1
+  cp fd ~/.local/bin/fd
+  cp fd.1 ~/.local/share/man/man1/fd.1
+  cp autocomplete/_fd ~/.local/share/zsh/site-functions/_fd
+  popd || exit 1
 
-echo
+  echo
+fi
 
 echo "ripgrep"
 curl -s https://api.github.com/repos/BurntSushi/ripgrep/releases/latest \
@@ -80,8 +91,19 @@ curl -s https://api.github.com/repos/BurntSushi/ripgrep/releases/latest \
   | cut -d : -f 2,3 \
   | tr -d \" \
   | wget -qi -
-tar xf ripgrep-*
+tar xf ripgrep-*.tar.gz
 rm -- *.tar.gz
+
+if [[ "$ARCH" = "aarch64" ]]; then
+  curl -s https://api.github.com/repos/microsoft/ripgrep-prebuilt/releases/latest \
+    | grep "browser_download_url.*${PLATFORM}.tar.gz" \
+    | cut -d : -f 2,3 \
+    | tr -d \" \
+    | wget -qi -
+  tar xf ripgrep-*.tar.gz
+  rm -- *.tar.gz
+  mv rg ripgrep-*
+fi
 
 pushd ripgrep-* || exit 1
 cp rg ~/.local/bin/rg
