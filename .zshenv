@@ -6,6 +6,16 @@
 # files sourced from ~/.zshrc. If you are certain that you must export some
 # environment variables in ~/.zshenv, do it where indicated by comments below.
 
+# locale
+export LANG=en_US.UTF-8
+export LC_COLLATE=C
+export LC_TIME=sl_SI.UTF-8
+export LC_MONETARY=sl_SI.UTF-8
+export LC_PAPER=sl_SI.UTF-8
+export LC_MEASUREMENT=sl_SI.UTF-8
+export LC_ADDRESS=sl_SI.UTF-8
+export LC_MESSAGES=C
+
 if [ -n "${ZSH_VERSION-}" ]; then
   : ${ZDOTDIR:=~}
   setopt no_global_rcs

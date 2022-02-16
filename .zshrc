@@ -63,15 +63,6 @@ if [[ -d /opt/ninja/1.10.1/Linux-x86_64 ]]; then
 fi
 
 ## Export environment variables.
-# locale
-export LANG=en_US.UTF-8
-export LC_COLLATE=C
-export LC_TIME=sl_SI.UTF-8
-export LC_MONETARY=sl_SI.UTF-8
-export LC_PAPER=sl_SI.UTF-8
-export LC_MEASUREMENT=sl_SI.UTF-8
-export LC_ADDRESS=sl_SI.UTF-8
-export LC_MESSAGES=C
 # hostname detection
 export HOSTNAME=$(hostname)
 [[ $(hostname) = 'lxplus'* ]]       && IS_LXPLUS=1
