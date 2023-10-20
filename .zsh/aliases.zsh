@@ -39,4 +39,8 @@ fi
 # -------------------------------------------------------------------
 # Tool aliases
 # -------------------------------------------------------------------
-(( $+commands[root] )) && root='root -l' # load ROOT without splash screen
+(( $+commands[root] )) && alias root='root -l' # load ROOT without splash screen
+
+(( $+commands[uproot-browser] )) && alias ub='uproot-browser browse'
+(( $+commands[uproot-browser] )) && alias up='uproot-browser plot --iterm'
+(( $+commands[uproot-browser] )) && alias ut='uproot-browser tree'
