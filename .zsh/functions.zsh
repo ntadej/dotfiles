@@ -24,14 +24,50 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
     fi
   }
 
-  function centos7arc()
+  function centos7batch()
   {
     # Use singularity
-    if [[ -n ${SINGULARITY_CENTOS7_ARC+x} ]]; then
+    if [[ -n ${SINGULARITY_CENTOS7_BATCH+x} ]]; then
       if [[ $IS_NAF -eq 1 ]]; then
-        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_CENTOS7_ARC" /bin/zsh -l
+        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /etc/condor:/etc/condor --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data --bind /var/lib/condor/util:/var/lib/condor/util --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_CENTOS7_BATCH" /bin/zsh -l
       else
-        "$SINGULARITY_CENTOS7_ARC" /bin/zsh -l
+        "$SINGULARITY_CENTOS7_BATCH" /bin/zsh -l
+      fi
+    fi
+  }
+
+  function alma9()
+  {
+    # Use singularity
+    if [[ -n ${SINGULARITY_ALMA9+x} ]]; then
+      if [[ $IS_NAF -eq 1 ]]; then
+        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/tmp:/var/tmp --bind /var/data:/var/data --bind /tmp:/tmp "$SINGULARITY_ALMA9" /bin/zsh -l
+      else
+        "$SINGULARITY_ALMA9" /bin/zsh -l
+      fi
+    fi
+  }
+
+  function alma9extra()
+  {
+    # Use singularity
+    if [[ -n ${SINGULARITY_ALMA9_EXTRA+x} ]]; then
+      if [[ $IS_NAF -eq 1 ]]; then
+        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_ALMA9_EXTRA" /bin/zsh -l
+      else
+        "$SINGULARITY_ALMA9_EXTRA" /bin/zsh -l
+      fi
+    fi
+  }
+
+  function alma9batch()
+  {
+    # Use singularity
+    if [[ -n ${SINGULARITY_ALMA9_BATCH+x} ]]; then
+      if [[ $IS_NAF -eq 1 ]]; then
+        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /etc/condor:/etc/condor --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data  --bind /var/lib/condor/util:/var/lib/condor/util --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_ALMA9_BATCH" /bin/zsh -l
+      else
+        "$SINGULARITY_ALMA9_BATCH" /bin/zsh -l
       fi
     fi
   }
