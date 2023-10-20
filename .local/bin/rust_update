@@ -49,41 +49,37 @@ popd || exit 1
 
 echo
 
-if [[ "$ARCH" != "aarch64" ]]; then
-  echo "dust"
-  curl -s https://api.github.com/repos/bootandy/dust/releases/latest \
-    | grep "browser_download_url.*${PLATFORM}.tar.gz" \
-    | cut -d : -f 2,3 \
-    | tr -d \" \
-    | wget -qi -
-  tar xf dust-*
-  rm -- *.tar.gz
+echo "dust"
+curl -s https://api.github.com/repos/bootandy/dust/releases/latest \
+  | grep "browser_download_url.*${PLATFORM}.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf dust-*
+rm -- *.tar.gz
 
-  pushd dust-* || exit 1
-  cp dust ~/.local/bin/dust
-  popd || exit 1
+pushd dust-* || exit 1
+cp dust ~/.local/bin/dust
+popd || exit 1
 
-  echo
-fi
+echo
 
-if [[ "$ARCH" != "aarch64" ]]; then  # binaries broken at the moment
-  echo "fd"
-  curl -s https://api.github.com/repos/sharkdp/fd/releases/latest \
-    | grep "browser_download_url.*${PLATFORM}.tar.gz" \
-    | cut -d : -f 2,3 \
-    | tr -d \" \
-    | wget -qi -
-  tar xf fd-*
-  rm -- *.tar.gz
+echo "fd"
+curl -s https://api.github.com/repos/sharkdp/fd/releases/latest \
+  | grep "browser_download_url.*${PLATFORM}.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf fd-*
+rm -- *.tar.gz
 
-  pushd fd-* || exit 1
-  cp fd ~/.local/bin/fd
-  cp fd.1 ~/.local/share/man/man1/fd.1
-  cp autocomplete/_fd ~/.local/share/zsh/site-functions/_fd
-  popd || exit 1
+pushd fd-* || exit 1
+cp fd ~/.local/bin/fd
+cp fd.1 ~/.local/share/man/man1/fd.1
+cp autocomplete/_fd ~/.local/share/zsh/site-functions/_fd
+popd || exit 1
 
-  echo
-fi
+echo
 
 echo "ripgrep"
 curl -s https://api.github.com/repos/BurntSushi/ripgrep/releases/latest \
