@@ -32,6 +32,9 @@
 	# Find untracked branches that used to be on origin
 	ut = "!f() { git branch -vv | grep origin | grep ': gone' | awk '{print $1}'; }; f"
 
+	# Fetch a MR
+	fetch-mr = "!sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2' -"
+
 [color]
 	ui = true
 
