@@ -1,8 +1,6 @@
 #!/bin/zsh
 
 export HOSTNAME=$(hostname)
-[[ $(hostname) = 'lxplus'* ]]       && IS_LXPLUS=1
-[[ $(hostname) = 'naf'* ]]          && IS_NAF=1
 [[ -n ${SINGULARITY_CONTAINER+x} ]] && IS_SINGULARITY=1
 
 source ~/.env.zsh

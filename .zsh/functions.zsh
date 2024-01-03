@@ -1,14 +1,62 @@
 # Singularity
 if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
+  function tn_singularity_zsh()
+  {
+    if [[ -f ~/.local/bin/zsh ]]; then
+      echo ~/.local/bin/zsh
+    else
+      echo "/bin/zsh"
+    fi
+  }
+
+  function tn_singularity_paths()
+  {
+    local paths=""
+    if [[ -d /afs ]]; then
+      paths="$paths --bind /afs:/afs"
+    fi
+    if [[ -d /cvmfs ]]; then
+      paths="$paths --bind /cvmfs:/cvmfs"
+    fi
+    if [[ -d /data ]]; then
+      paths="$paths --bind /data:/data"
+    fi
+    if [[ -d /nfs ]]; then
+      paths="$paths --bind /nfs:/nfs"
+    fi
+    if [[ -d /pnfs ]]; then
+      paths="$paths --bind /pnfs:/pnfs"
+    fi
+    if [[ -d /var/data ]]; then
+      paths="$paths --bind /var/data:/var/data"
+    fi
+    if [[ -d /var/tmp ]]; then
+      paths="$paths --bind /var/tmp:/var/tmp"
+    fi
+    if [[ -d /tmp ]]; then
+      paths="$paths --bind /tmp:/tmp"
+    fi
+    if [[ -S /var/run/.heim_org.h5l.kcm-socket ]]; then
+      paths="$paths --bind /var/run/.heim_org.h5l.kcm-socket:/var/run/.heim_org.h5l.kcm-socket"
+    fi
+    if [[ -d "/run/user/$(id -u $USER)" ]]; then
+      paths="$paths --bind /run/user/$(id -u $USER):/run/user/$(id -u $USER)"
+    fi
+    if [[ -d /etc/condor ]]; then
+      paths="$paths --bind /etc/condor:/etc/condor"
+    fi
+    if [[ -d /var/lib/condor/util ]]; then
+      paths="$paths --bind /var/lib/condor/util:/var/lib/condor/util"
+    fi
+
+    echo "$paths"
+  }
+
   function centos7()
   {
     # Use singularity
     if [[ -n ${SINGULARITY_CENTOS7+x} ]]; then
-      if [[ $IS_NAF -eq 1 ]]; then
-        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/tmp:/var/tmp --bind /var/data:/var/data --bind /tmp:/tmp "$SINGULARITY_CENTOS7" /bin/zsh -l
-      else
-        "$SINGULARITY_CENTOS7" /bin/zsh -l
-      fi
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_CENTOS7" $(tn_singularity_zsh) -l
     fi
   }
 
@@ -16,11 +64,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_CENTOS7_EXTRA+x} ]]; then
-      if [[ $IS_NAF -eq 1 ]]; then
-        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_CENTOS7_EXTRA" /bin/zsh -l
-      else
-        "$SINGULARITY_CENTOS7_EXTRA" /bin/zsh -l
-      fi
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_CENTOS7_EXTRA" $(tn_singularity_zsh) -l
     fi
   }
 
@@ -28,11 +72,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_CENTOS7_BATCH+x} ]]; then
-      if [[ $IS_NAF -eq 1 ]]; then
-        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /etc/condor:/etc/condor --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data --bind /var/lib/condor/util:/var/lib/condor/util --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_CENTOS7_BATCH" /bin/zsh -l
-      else
-        "$SINGULARITY_CENTOS7_BATCH" /bin/zsh -l
-      fi
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_CENTOS7_BATCH" $(tn_singularity_zsh) -l
     fi
   }
 
@@ -40,11 +80,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_ALMA9+x} ]]; then
-      if [[ $IS_NAF -eq 1 ]]; then
-        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/tmp:/var/tmp --bind /var/data:/var/data --bind /tmp:/tmp "$SINGULARITY_ALMA9" /bin/zsh -l
-      else
-        "$SINGULARITY_ALMA9" /bin/zsh -l
-      fi
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_ALMA9" $(tn_singularity_zsh) -l
     fi
   }
 
@@ -52,11 +88,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_ALMA9_EXTRA+x} ]]; then
-      if [[ $IS_NAF -eq 1 ]]; then
-        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_ALMA9_EXTRA" /bin/zsh -l
-      else
-        "$SINGULARITY_ALMA9_EXTRA" /bin/zsh -l
-      fi
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_ALMA9_EXTRA" $(tn_singularity_zsh) -l
     fi
   }
 
@@ -64,11 +96,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_ALMA9_BATCH+x} ]]; then
-      if [[ $IS_NAF -eq 1 ]]; then
-        singularity exec --contain --pwd "$(pwd)" --bind /afs:/afs --bind /cvmfs:/cvmfs --bind /data:/data --bind /etc/condor:/etc/condor --bind /nfs:/nfs --bind /pnfs:/pnfs --bind /var/data:/var/data  --bind /var/lib/condor/util:/var/lib/condor/util --bind /var/tmp:/var/tmp --bind /tmp:/tmp "$SINGULARITY_ALMA9_BATCH" /bin/zsh -l
-      else
-        "$SINGULARITY_ALMA9_BATCH" /bin/zsh -l
-      fi
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_ALMA9_BATCH" $(tn_singularity_zsh) -l
     fi
   }
 fi
