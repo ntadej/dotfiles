@@ -89,6 +89,7 @@ curl -s https://api.github.com/repos/BurntSushi/ripgrep/releases/latest \
   | wget -qi -
 tar xf ripgrep-*.tar.gz
 rm -- *.tar.gz
+rm -- *.tar.gz.sha256
 
 if [[ "$ARCH" = "aarch64" ]]; then
   curl -s https://api.github.com/repos/microsoft/ripgrep-prebuilt/releases/latest \
