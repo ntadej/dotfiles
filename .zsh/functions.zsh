@@ -123,7 +123,7 @@ function f9()
     pc=$1
   fi
 
-  ssh -Y "f9pc${pc}.ijs.si" -o UserKnownHostsFile=~/.ssh/known_f9 "${@:2}"
+  ssh "f9pc${pc}.ijs.si" -o UserKnownHostsFile=~/.ssh/known_f9 "${@:2}"
 }
 
 function naf()
@@ -133,9 +133,22 @@ function naf()
   fi
 
   if [[ "${1}" == "dev" ]]; then
-    ssh -Y "naf-dev" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
+    ssh "naf-dev" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
   else
-    ssh -Y "naf-atlas${1}.desy.de" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
+    ssh "naf-atlas${1}.desy.de" -o UserKnownHostsFile=~/.ssh/known_naf "${@:2}"
+  fi
+}
+
+function vega()
+{
+  if [[ $OSTYPE == darwin* ]]; then
+    kswitch -p tadej@SLING.SI
+  fi
+
+  if [[ -n ${1+x} ]]; then
+    ssh "vglogin000${1}.vega.izum.si" "${@:2}"
+  else
+    ssh "vega" "${@:2}"
   fi
 }
 
