@@ -63,7 +63,7 @@
 [user]
 	name = Tadej Novak
 	email = tadej@tano.si
-	signingkey = ~/.ssh/id_ed25519.pub
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyUZrwImvnKismyQwZ/BnhlRTbPe2JLbrvrYDvLlMZZ
 
 [github]
   user = ntadej
