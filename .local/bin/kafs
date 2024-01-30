@@ -35,6 +35,8 @@ for account in $accounts; do
     if kinit "$account"; then break; fi
   done
 
-  echo "  aklog..."
-  aklog -c "$cell" -k "$realm"
+  if command -v aklog >/dev/null 2>&1; then
+    echo "  aklog..."
+    aklog -c "$cell" -k "$realm"
+  fi
 done
