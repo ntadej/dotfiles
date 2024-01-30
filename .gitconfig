@@ -35,6 +35,8 @@
 	# Fetch a MR
 	fetch-mr = "!sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2' -"
 
+	# Push to a MR
+	push-mr = "!sh -c 'git push $1 mr-$1-$2:merge-requests/$2/head' -"
 [color]
 	ui = true
 
