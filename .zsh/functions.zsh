@@ -52,6 +52,16 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
     echo "$paths"
   }
 
+  function podman_to_singularity()
+  {
+    if [[ -z ${2+x} ]]; then
+      echo "Two arguments are required!"
+    fi
+
+    podman save --format oci-archive "$1" -o "$2.tar"
+    singularity build "$2.sif" "oci-archive://$2.tar"
+  }
+
   function centos7()
   {
     # Use singularity
