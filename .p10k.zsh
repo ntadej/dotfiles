@@ -34,7 +34,7 @@
     # =========================[ Line #1 ]=========================
     os_icon                 # os identifier
     context                 # user@hostname
-    singularity             # singularity detection
+    apptainer               # apptainer detection
     dir                     # current directory
     vcs                     # git status
     # =========================[ Line #2 ]=========================
@@ -915,9 +915,9 @@
   # Custom prefix.
   # typeset -g POWERLEVEL9K_CONTEXT_PREFIX='with '
 
-  ##################################[ singularity ]##################################
-  typeset -g POWERLEVEL9K_SINGULARITY_FOREGROUND=0
-  typeset -g POWERLEVEL9K_SINGULARITY_BACKGROUND=14
+  ##################################[ apptainer ]##################################
+  typeset -g POWERLEVEL9K_APPTAINER_FOREGROUND=0
+  typeset -g POWERLEVEL9K_APPTAINER_BACKGROUND=14
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.

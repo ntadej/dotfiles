@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 export HOSTNAME=$(hostname)
-[[ -n ${SINGULARITY_CONTAINER+x} ]] && IS_SINGULARITY=1
+[[ -n ${SINGULARITY_CONTAINER+x} || -n ${APPTAINER_CONTAINER+x} ]] && IS_APPTAINER=1
 
 source ~/.env.zsh
 source ~/.zsh/functions.zsh

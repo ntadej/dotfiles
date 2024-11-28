@@ -1,6 +1,6 @@
-# Singularity
-if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
-  function tn_singularity_zsh()
+# Apptainer
+if (( $+commands[apptainer] || $+commands[singularity] )) && [[ ! $IS_APPTAINER -eq 1 ]]; then
+  function tn_apptainer_zsh()
   {
     if [[ -f ~/.local/bin/zsh ]]; then
       echo ~/.local/bin/zsh
@@ -9,7 +9,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
     fi
   }
 
-  function tn_singularity_paths()
+  function tn_apptainer_paths()
   {
     local paths=""
     if [[ -d /afs ]]; then
@@ -55,70 +55,73 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
     echo "$paths"
   }
 
-  function tn_singularity_run()
+  function tn_apptainer_run()
   {
-    if (( $+commands[zshs] )) && [[ -n ${2+x} ]]; then
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$1" $(which zshs) $2 -l
+    local command
+    if (( $+commands[apptainer] )); then
+      command="apptainer"
+    elif (( $+commands[singularity] )); then
+      command="singularity"
     else
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$1" $(tn_singularity_zsh) -l
+      return
+    fi
+
+    if (( $+commands[zshs] )) && [[ -n ${2+x} ]]; then
+      $command exec --pwd "$(pwd)" $(tn_apptainer_paths) "$1" $(which zshs) $2 -l
+    else
+      $command exec --pwd "$(pwd)" $(tn_apptainer_paths) "$1" $(tn_apptainer_zsh) -l
     fi
   }
 
-  function podman_to_singularity()
+  function podman_to_apptainer()
   {
     if [[ -z ${2+x} ]]; then
       echo "Two arguments are required!"
     fi
 
     podman save --format oci-archive "$1" -o "$2.tar"
-    singularity build "$2.sif" "oci-archive://$2.tar"
+    apptainer build "$2.sif" "oci-archive://$2.tar"
   }
 
   function centos7()
   {
-    # Use singularity
-    if [[ -n ${SINGULARITY_CENTOS7+x} ]]; then
-      tn_singularity_run "$SINGULARITY_CENTOS7" ${1}
+    if [[ -n ${APPTAINER_CENTOS7+x} ]]; then
+      tn_apptainer_run "$APPTAINER_CENTOS7" ${1}
     fi
   }
 
   function centos7extra()
   {
-    # Use singularity
-    if [[ -n ${SINGULARITY_CENTOS7_EXTRA+x} ]]; then
-      tn_singularity_run "$SINGULARITY_CENTOS7_EXTRA" ${1}
+    if [[ -n ${APPTAINER_CENTOS7_EXTRA+x} ]]; then
+      tn_apptainer_run "$APPTAINER_CENTOS7_EXTRA" ${1}
     fi
   }
 
   function centos7batch()
   {
-    # Use singularity
-    if [[ -n ${SINGULARITY_CENTOS7_BATCH+x} ]]; then
-      tn_singularity_run "$SINGULARITY_CENTOS7_BATCH" ${1}
+    if [[ -n ${APPTAINER_CENTOS7_BATCH+x} ]]; then
+      tn_apptainer_run "$APPTAINER_CENTOS7_BATCH" ${1}
     fi
   }
 
   function alma9()
   {
-    # Use singularity
-    if [[ -n ${SINGULARITY_ALMA9+x} ]]; then
-      tn_singularity_run "$SINGULARITY_ALMA9" ${1}
+    if [[ -n ${APPTAINER_ALMA9+x} ]]; then
+      tn_apptainer_run "$APPTAINER_ALMA9" ${1}
     fi
   }
 
   function alma9extra()
   {
-    # Use singularity
-    if [[ -n ${SINGULARITY_ALMA9_EXTRA+x} ]]; then
-      tn_singularity_run "$SINGULARITY_ALMA9_EXTRA" ${1}
+    if [[ -n ${APPTAINER_ALMA9_EXTRA+x} ]]; then
+      tn_apptainer_run "$APPTAINER_ALMA9_EXTRA" ${1}
     fi
   }
 
   function alma9batch()
   {
-    # Use singularity
-    if [[ -n ${SINGULARITY_ALMA9_BATCH+x} ]]; then
-      tn_singularity_run "$SINGULARITY_ALMA9_BATCH" ${1}
+    if [[ -n ${APPTAINER_ALMA9_BATCH+x} ]]; then
+      tn_apptainer_run "$APPTAINER_ALMA9_BATCH" ${1}
     fi
   }
 fi

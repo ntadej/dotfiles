@@ -54,7 +54,7 @@ path=(~/.local/bin $path)
 ## Export environment variables.
 # hostname detection
 export HOSTNAME=$(hostname)
-[[ -n ${SINGULARITY_CONTAINER+x} ]] && IS_SINGULARITY=1
+[[ -n ${SINGULARITY_CONTAINER+x} || -n ${APPTAINER_CONTAINER+x} ]] && IS_APPTAINER=1
 # GPG
 GNUPG_AGENT_SOCKET=$(gpgconf --list-dirs | grep agent-socket)
 GNUPG_AGENT_SOCKET=${GNUPG_AGENT_SOCKET//agent-socket:/}
