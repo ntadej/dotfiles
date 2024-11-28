@@ -93,3 +93,6 @@
 
 [gpg "ssh"]
 	allowedSignersFile = ~/.gitsigners
+
+[include]
+	path = ~/.gitconfig-extra
