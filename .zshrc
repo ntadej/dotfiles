@@ -91,6 +91,11 @@ autoload -Uz zmv
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
+if (( $+commands[uv] )); then
+  eval "$(uv generate-shell-completion zsh)"
+  eval "$(uvx --generate-shell-completion zsh)"
+fi
+
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
 
