@@ -49,7 +49,19 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
       paths="$paths --bind /var/lib/condor/util:/var/lib/condor/util"
     fi
 
+    # to disable (auto)-mounting
+    # paths="$paths --no-mount /exa5"
+
     echo "$paths"
+  }
+
+  function tn_singularity_run()
+  {
+    if (( $+commands[zshs] )) && [[ -n ${2+x} ]]; then
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$1" $(which zshs) $2 -l
+    else
+      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$1" $(tn_singularity_zsh) -l
+    fi
   }
 
   function podman_to_singularity()
@@ -66,7 +78,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_CENTOS7+x} ]]; then
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_CENTOS7" $(tn_singularity_zsh) -l
+      tn_singularity_run "$SINGULARITY_CENTOS7" ${1}
     fi
   }
 
@@ -74,7 +86,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_CENTOS7_EXTRA+x} ]]; then
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_CENTOS7_EXTRA" $(tn_singularity_zsh) -l
+      tn_singularity_run "$SINGULARITY_CENTOS7_EXTRA" ${1}
     fi
   }
 
@@ -82,7 +94,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_CENTOS7_BATCH+x} ]]; then
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_CENTOS7_BATCH" $(tn_singularity_zsh) -l
+      tn_singularity_run "$SINGULARITY_CENTOS7_BATCH" ${1}
     fi
   }
 
@@ -90,7 +102,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_ALMA9+x} ]]; then
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_ALMA9" $(tn_singularity_zsh) -l
+      tn_singularity_run "$SINGULARITY_ALMA9" ${1}
     fi
   }
 
@@ -98,7 +110,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_ALMA9_EXTRA+x} ]]; then
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_ALMA9_EXTRA" $(tn_singularity_zsh) -l
+      tn_singularity_run "$SINGULARITY_ALMA9_EXTRA" ${1}
     fi
   }
 
@@ -106,7 +118,7 @@ if (( $+commands[singularity] )) && [[ ! $IS_SINGULARITY -eq 1 ]]; then
   {
     # Use singularity
     if [[ -n ${SINGULARITY_ALMA9_BATCH+x} ]]; then
-      singularity exec --pwd "$(pwd)" $(tn_singularity_paths) "$SINGULARITY_ALMA9_BATCH" $(tn_singularity_zsh) -l
+      tn_singularity_run "$SINGULARITY_ALMA9_BATCH" ${1}
     fi
   }
 fi
