@@ -177,6 +177,19 @@ function vega()
   fi
 }
 
+function arnes()
+{
+  if [[ $OSTYPE == darwin* ]]; then
+    kswitch -p tadej@SLING.SI
+  fi
+
+  if [[ -n ${1+x} ]]; then
+    ssh "hpc-login${1}.arnes.si" "${@:2}"
+  else
+    ssh "arnes" "${@:2}"
+  fi
+}
+
 # ATLAS
 function setupATLAS()
 {
