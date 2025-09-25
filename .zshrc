@@ -15,8 +15,8 @@ zstyle ':z4h:' start-tmux         'no'
 # Move prompt to the bottom when zsh starts up so that it's always in the
 # same position. Has no effect if start-tmux is 'no'.
 zstyle ':z4h:' prompt-at-bottom   'yes'
-# iTerm 2 integration
-zstyle ':z4h:' iterm2-integration 'yes'
+# Mark up shell's output with semantic information.
+zstyle ':z4h:' term-shell-integration 'yes'
 
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard  'mac'
@@ -95,6 +95,10 @@ fpath+=~/.zfunc; autoload -Uz compinit; compinit
 if (( $+commands[uv] )); then
   eval "$(uv generate-shell-completion zsh)"
   eval "$(uvx --generate-shell-completion zsh)"
+fi
+
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
 fi
 
 # Define named directories: ~w <=> Windows home directory on WSL.
