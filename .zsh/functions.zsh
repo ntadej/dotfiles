@@ -83,6 +83,11 @@ if (( $+commands[apptainer] || $+commands[singularity] )) && [[ ! $IS_APPTAINER 
     apptainer build "$2.sif" "oci-archive://$2.tar"
   }
 
+  function slc6()
+  {
+    tn_apptainer_run "/cvmfs/atlas.cern.ch/repo/containers/fs/singularity/x86_64-centos6" ${1}
+  }
+
   function centos7()
   {
     if [[ -n ${APPTAINER_CENTOS7+x} ]]; then
