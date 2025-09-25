@@ -90,6 +90,7 @@ autoload -Uz zmv
 # Define functions and completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
 if (( $+commands[uv] )); then
   eval "$(uv generate-shell-completion zsh)"
