@@ -17,6 +17,21 @@ mkdir -p "/tmp/$USER/rust"
 pushd "/tmp/$USER/rust" || exit 1
 echo
 
+echo "atuin"
+curl -s https://api.github.com/repos/atuinsh/atuin/releases/latest \
+  | grep "browser_download_url.*${PLATFORM}.tar.gz\"" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
+tar xf atuin-*
+rm -- *.tar.gz
+
+pushd atuin-* || exit 1
+cp atuin ~/.local/bin/atuin
+popd || exit 1
+
+echo
+
 echo "bat"
 curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
   | grep "browser_download_url.*${PLATFORM}.tar.gz" \
