@@ -129,6 +129,27 @@ if (( $+commands[apptainer] || $+commands[singularity] )) && [[ ! $IS_APPTAINER 
       tn_apptainer_run "$APPTAINER_ALMA9_BATCH" ${1}
     fi
   }
+
+  function alma10()
+  {
+    if [[ -n ${APPTAINER_ALMA10+x} ]]; then
+      tn_apptainer_run "$APPTAINER_ALMA10" ${1}
+    fi
+  }
+
+  function alma10extra()
+  {
+    if [[ -n ${APPTAINER_ALMA10_EXTRA+x} ]]; then
+      tn_apptainer_run "$APPTAINER_ALMA10_EXTRA" ${1}
+    fi
+  }
+
+  function alma10batch()
+  {
+    if [[ -n ${APPTAINER_ALMA10_BATCH+x} ]]; then
+      tn_apptainer_run "$APPTAINER_ALMA10_BATCH" ${1}
+    fi
+  }
 fi
 
 # SSH
