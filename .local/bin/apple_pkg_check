@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Number of files to inspect per package receipt
+MAX_FILES_TO_CHECK=1000
+
+echo "Checking installed package files status (scanning up to $MAX_FILES_TO_CHECK files per package)..."
+echo "----------------------------------------------------------------------"
+
+for pkg in $(pkgutil --pkgs | grep -v "^com.apple" | sort); do
+    found_count=0
+    missing_count=0
+    total_checked=0
+
+    location=$(pkgutil --pkg-info "$pkg" | awk -F': ' '
+      $1 == "volume" { vol = $2 } 
+      $1 == "location" { loc = $2 } 
+      END { print vol loc }
+    ')
+    if [ "$location" = "/" ] || [ "$location" = "//" ]; then
+        location=""
+    fi
+
+    # Get up to N files from the package receipt
+    while IFS= read -r file; do
+        # Skip empty lines
+        [ -z "$file" ] && continue
+        
+        if [ -e "$location/$file" ] || [ -e "/Applications/$file" ]; then
+            ((found_count++))
+        else
+            ((missing_count++))
+        fi
+        ((total_checked++))
+    done < <(pkgutil --files "$pkg" | head -n "$MAX_FILES_TO_CHECK")
+
+    # Evaluate package status based on file existence
+    if [ "$total_checked" -eq 0 ]; then
+        echo "[EMPTY]     $pkg (No files recorded in receipt)"
+    elif [ "$missing_count" -eq 0 ]; then
+        :
+        # echo "[INSTALLED] $pkg ($found_count/$total_checked files found)"
+    elif [ "$found_count" -gt 0 ]; then
+        echo "[PARTIAL]   $pkg ($found_count/$total_checked files found, $missing_count missing)"
+    else
+        echo "[ORPHANED]  $pkg (0/$total_checked files found)"
+        # Prompt user to forget the orphaned package receipt
+        read -p "Do you want to forget receipt '$pkg'? [y/N]: " -n 1 -r < /dev/tty
+        echo "" # Move to a new line
+        
+        case "$REPLY" in 
+            [yY][eE][sS]|[yY])
+                echo "Forgetting $pkg..."
+                sudo pkgutil --forget "$pkg"
+                ;;
+            *)
+                echo "Skipped $pkg."
+                ;;
+        esac
+    fi
+done
