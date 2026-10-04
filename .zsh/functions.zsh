@@ -168,6 +168,10 @@ function lxplus()
 
 function f9()
 {
+  if [[ $OSTYPE == darwin* ]]; then
+    kswitch -p tadej@F9.IJS.SI
+  fi
+
   if [[ -z ${1+x} ]]; then
     pc=19
   else
