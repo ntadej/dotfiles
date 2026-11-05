@@ -37,3 +37,7 @@ Temporary Items
 
 # ZSH
 *.zwc
+
+# Claude
+**/.claude/settings.local.json
+**/.claude/.cc-writes/
