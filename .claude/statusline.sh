@@ -2,7 +2,10 @@
 # Claude Code status line in the style of ~/.p10k.zsh (rainbow, slanted separators, Nerd Font icons):
 #   os · user@host · repo · git state   then   model · context used · plan usage limits (session cost when there are none).
 # Claude Code pipes session JSON on stdin; fields: https://code.claude.com/docs/en/statusline#available-data
-# Written for macOS /bin/bash 3.2, so glyphs are spelled as UTF-8 bytes rather than \u escapes.
+# Written for macOS /bin/bash 3.2, so glyphs are spelled as UTF-8 bytes rather than \u escapes; also runs on Linux.
+# Install: cp tools/statusline.sh ~/.claude/statusline.sh
+
+export LC_ALL=C # printf %f needs a dot decimal separator: sl_SI and de_DE reject jq's 45.6
 
 IFS='|' read -r model ctx five five_reset week cost dir repo host < <(jq -r '[
   .model.display_name // "?",
@@ -17,8 +20,8 @@ IFS='|' read -r model ctx five five_reset week cost dir repo host < <(jq -r '[
 ] | map(tostring) | join("|")')
 
 esc=$'\033' reset=$'\033[0m' bold=$'\033[1m' nobold=$'\033[22m'
-head=$'\xee\x82\xba' sep=$'\xee\x82\xbc' sub=$'\xe2\x95\xb1' # U+E0BA , U+E0BC , U+2571 ╱
-apple=$'\xef\x85\xb9' folder=$'\xef\x81\xbc' branch_icon=$'\xef\x84\xa6 ' # U+F179 , U+F07C , U+F126
+head=$'\xee\x82\xba' sep=$'\xee\x82\xbc' sub=$'\xe2\x95\xb1' # U+E0BA, U+E0BC, U+2571 ╱
+apple=$'\xef\x85\xb9' folder=$'\xef\x81\xbc' branch_icon=$'\xef\x84\xa6 ' # U+F179, U+F07C, U+F126
 case $host in
   *gitlab*) git_icon=$'\xef\x8a\x96' ;; # U+F296
   *github*) git_icon=$'\xef\x84\x93' ;; # U+F113
@@ -96,7 +99,8 @@ left=$line line=''
 seg 7 0 "$model"
 [[ -n $ctx ]] && pct ctx "$ctx"
 if [[ -n $five || -n $week ]]; then
-  [[ -n $five ]] && pct 5h "$five" "${five_reset:+ ↻$(date -r "$five_reset" +%H:%M)}"
+  # BSD date takes epoch seconds with -r; GNU date reads -r as a file, so fall back to -d @epoch
+  [[ -n $five ]] && pct 5h "$five" "${five_reset:+ ↻$(date -r "$five_reset" +%H:%M 2>/dev/null || date -d "@$five_reset" +%H:%M)}"
   [[ -n $week ]] && pct 7d "$week"
 elif [[ $cost != 0 ]]; then
   seg 7 0 "$(printf '$%.2f' "$cost")"
@@ -107,7 +111,8 @@ right=$line
 # Push the right side to the terminal's right edge, like p10k's right prompt. Claude Code passes the terminal width
 # in COLUMNS; MARGIN leaves room for the padding Claude Code adds around the status line (raise it if the line wraps).
 # When the two sides don't fit, they stay one space apart.
-width() { printf '%s' "$1" | LC_ALL=C sed $'s/\x1b\\[[0-9;]*m//g' | LC_ALL=en_US.UTF-8 wc -m; }
+# C.UTF-8 rather than en_US.UTF-8: it exists on macOS and is built into glibc, so wc -m counts characters, not bytes.
+width() { printf '%s' "$1" | LC_ALL=C sed $'s/\x1b\\[[0-9;]*m//g' | LC_ALL=C.UTF-8 wc -m; }
 gap=$((${COLUMNS:-0} - ${STATUSLINE_MARGIN:-4} - $(width "$left") - $(width "$right")))
 ((gap < 1)) && gap=1
 printf '%s%*s%s\n' "$left" "$gap" '' "$right"
